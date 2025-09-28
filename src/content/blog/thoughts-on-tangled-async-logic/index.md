@@ -50,7 +50,7 @@ language: '中文'
 
 它的思路很直接：把输入看作数据流，交给操作符处理，输出我们想要的结果。这样就不再需要到处维护标志位和清理逻辑，而是像搭建一条管道，把水流顺势引导。
 
-<img src="/src/content/blog/thoughts-on-tangled-async-logic/Illustration.jpg" alt="flowing lines" style="width: 500px" />
+![flowing lines](./Illustration.jpg)
 
 ## 实现的雏形
 
