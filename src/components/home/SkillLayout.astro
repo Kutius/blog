@@ -1,36 +1,37 @@
 ---
-import SkillBadge from './SkillBadge.astro'
+import { Icon } from 'astro-icon/components'
 
-interface Skill {
-  name: string
-  icon?: string
-}
+type Skill = string | { name: string; icon?: string }
 
-interface Props {
-  /** 技能分组的标题 */
+type Props = {
   title: string
-  /** 技能列表，可以是字符串数组或对象数组 */
-  skills: Array<Skill | string>
-  /** 标题的 HTML 标签，默认为 h3 */
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  skills: Skill[]
 }
 
-const { title, skills, as: Tag = 'h3' } = Astro.props
-
-// 标准化数据，确保每个 skill 都是 { name, icon } 格式的对象
-const normalizedSkills = skills.map((skill) => {
-  if (typeof skill === 'string') {
-    return { name: skill, icon: undefined }
-  }
-  return skill
-});
+const { title, skills } = Astro.props
 ---
 
-<div class="flex flex-col gap-y-3 md:flex-row md:gap-x-6 md:gap-y-0">
-  <Tag class="w-full shrink-0 font-semibold md:w-32">{title}</Tag>
-  <div class="flex flex-row flex-wrap gap-3">
-    {normalizedSkills.map(skill => (
-      <SkillBadge name={skill.name} icon={skill.icon} />
-    ))}
+<div class='flex flex-col gap-y-2 md:flex-row md:gap-x-5 md:gap-y-0'>
+  <h3 class='w-1/5 font-medium text-foreground/80'>{title}</h3>
+  <div class='flex flex-row flex-wrap gap-x-3 gap-y-2 md:w-4/5'>
+    {
+      skills.map((skill: Skill) => {
+        const item = typeof skill === 'string' ? { name: skill } : skill
+
+        return (
+          <div class='group flex items-center justify-center gap-x-1.5 rounded-full border border-border/80 bg-muted/65 px-3 py-1 text-sm shadow-sm transition-all duration-200 hover:-translate-y-px hover:border-primary/55 hover:bg-primary/12 hover:shadow-md'>
+            {item.icon && (
+              <Icon
+                name={item.icon}
+                class='size-4 opacity-80 transition-opacity group-hover:opacity-100'
+              />
+            )}
+            <span class='text-muted-foreground transition-colors group-hover:text-foreground'>
+              {item.name}
+            </span>
+          </div>
+        )
+      })
+    }
   </div>
 </div>

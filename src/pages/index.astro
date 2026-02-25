@@ -13,45 +13,35 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
 
 const languages = [
-  { name: 'JavaScript', icon: 'devicon:javascript' },
-  { name: 'TypeScript', icon: 'devicon:typescript' },
-  { name: 'Python', icon: 'devicon:python' },
-  { name: 'Kotlin', icon: 'devicon:kotlin' },
-  { name: 'Dart', icon: 'devicon:dart' },
+  { name: 'JavaScript', icon: 'catppuccin:javascript' },
+  { name: 'TypeScript', icon: 'catppuccin:typescript' },
+  { name: 'Python', icon: 'catppuccin:python' },
+  { name: 'Kotlin', icon: 'catppuccin:kotlin' },
+  { name: 'Dart', icon: 'catppuccin:dart' },
 ]
 const frontend = [
-  { name: 'Vue', icon: 'devicon:vuejs' },
-  { name: 'React', icon: 'devicon:react' },
-  { name: 'Solid', icon: 'devicon:solidjs' },
-  { name: 'Svelte', icon: 'devicon:svelte' },
-  { name: 'Astro', icon: 'devicon:astro' },
-  { name: 'Nuxt.js', icon: 'devicon:nuxtjs' },
-  { name: 'Next.js', icon: 'devicon:nextjs' },
-  { name: 'Vite', icon: 'devicon:vitejs' },
-  { name: 'Vitest', icon: 'devicon:vitest' },
-  { name: 'Playwright', icon: 'devicon:playwright' },
-  { name: 'Tailwind CSS', icon: 'devicon:tailwindcss' },
-  { name: 'UnoCSS' },
-  { name: 'Tanstack Start' },
+  { name: 'Vue', icon: 'catppuccin:vue' },
+  { name: 'React', icon: 'catppuccin:javascript-react' },
+  { name: 'Solid', icon: 'catppuccin:solid' },
+  { name: 'Svelte', icon: 'catppuccin:svelte' },
+  { name: 'Astro', icon: 'catppuccin:astro' },
+  { name: 'Nuxt.js', icon: 'catppuccin:nuxt' },
+  { name: 'Vite', icon: 'catppuccin:vite' },
+  { name: 'Vitest', icon: 'catppuccin:vitest' },
+  { name: 'Tailwind CSS', icon: 'catppuccin:tailwind' },
 ]
 const backend = [
-  { name: 'Node.js', icon: 'devicon:nodejs' },
-  { name: 'Nest.js', icon: 'devicon:nestjs' },
-  { name: 'MongoDB', icon: 'devicon:mongodb' },
-  { name: 'Cloudflare', icon: 'devicon:cloudflare' },
-  { name: 'Netlify', icon: 'devicon:netlify' },
-  { name: 'Vercel', icon: 'devicon:vercel' },
-  { name: 'Supabase', icon: 'devicon:supabase' },
-  { name: 'Prisma', icon: 'devicon:prisma' },
-  { name: 'Drizzle' },
+  'Cloudflare',
+  { name: 'Netlify', icon: 'catppuccin:netlify' },
+  { name: 'Vercel', icon: 'catppuccin:vercel' },
+  'Supabase',
+  'Drizzle',
 ]
 const native = [
-  { name: 'React Native', icon: 'devicon:expo' },
-  { name: 'Flutter', icon: 'devicon:flutter' },
-  { name: 'Electron', icon: 'devicon:electron' },
-  { name: 'Tauri', icon: 'devicon:tauri' },
-  { name: 'Ionic', icon: 'devicon:ionic' },
-  { name: 'KMP', icon: 'devicon:jetpackcompose' },
+  { name: 'React Native', icon: 'catppuccin:javascript-react' },
+  { name: 'Flutter', icon: 'catppuccin:flutter' },
+  'Electron',
+  { name: 'Tauri', icon: 'catppuccin:tauri' },
 ]
 
 const MAX_POSTS = 10
@@ -183,6 +173,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
             href="https://github.com/Kutius/EldenSaving"
             heading="EldenSaving"
             subheading="A tool for backup Elden Ring save data"
+            imagePath="/src/assets/projects/alex-tyson-2BAXJ7ha74s-unsplash.jpg"
           />
           <ProjectCard
             href="/projects"

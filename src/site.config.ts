@@ -107,6 +107,7 @@ export const integ: IntegrationUserConfig = {
       { name: 'Link', val: 'https://vapor3.art' },
       { name: 'Avatar', val: 'https://avatars.githubusercontent.com/u/43736711' },
     ],
+    cacheAvatar: false,
   },
   // Enable page search function
   pagefind: true,

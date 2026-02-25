@@ -26,6 +26,7 @@
     "@astrojs/netlify": "^6.5.7",
     "@waline/client": "^3.8.0",
     "astro": "^5.16.6",
+    "astro-icon": "^1.1.5",
     "astro-pure": "1.4.0",
     "katex": "^0.16.27",
     "rehype-katex": "^7.0.1",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@iconify-json/catppuccin": "^1.2.17",
     "@typescript-eslint/parser": "^8.51.0",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",

@@ -1,7 +1,8 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import netlify from '@astrojs/netlify'
+import AstroIcon from 'astro-icon'
 import AstroPureIntegration from 'astro-pure'
-import { defineConfig } from 'astro/config'
+import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 
@@ -100,6 +101,7 @@ export default defineConfig({
     // astro-pure will automatically add sitemap, mdx & unocss
     // sitemap(),
     // mdx(),
+    AstroIcon(),
     AstroPureIntegration(config)
   ],
 
@@ -108,6 +110,15 @@ export default defineConfig({
     // Allow compatible editors to support intellisense features for content collection entries
     // https://docs.astro.build/en/reference/experimental-flags/content-intellisense/
     contentIntellisense: true,
-    // Keep only flags supported by current local Astro version
+    fonts: [
+      {
+        provider: fontProviders.fontshare(),
+        name: 'Satoshi',
+        cssVariable: '--font-satoshi',
+        styles: ['normal', 'italic'],
+        weights: [400, 500],
+        subsets: ['latin']
+      }
+    ]
   }
 })
