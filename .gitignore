@@ -42,3 +42,7 @@ bunfig.toml
 
 # Local Netlify folder
 .netlify
+
+# Gemini / GitHub Action local creds
+.gemini/
+gha-creds-*.json
