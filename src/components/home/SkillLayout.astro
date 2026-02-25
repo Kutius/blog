@@ -1,17 +1,36 @@
 ---
-import { Button } from 'astro-pure/user'
+import SkillBadge from './SkillBadge.astro'
 
-type Props = {
-  title: string
-  skills: string[]
+interface Skill {
+  name: string
+  icon?: string
 }
 
-const { title, skills } = Astro.props
+interface Props {
+  /** 技能分组的标题 */
+  title: string
+  /** 技能列表，可以是字符串数组或对象数组 */
+  skills: Array<Skill | string>
+  /** 标题的 HTML 标签，默认为 h3 */
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+}
+
+const { title, skills, as: Tag = 'h3' } = Astro.props
+
+// 标准化数据，确保每个 skill 都是 { name, icon } 格式的对象
+const normalizedSkills = skills.map((skill) => {
+  if (typeof skill === 'string') {
+    return { name: skill, icon: undefined }
+  }
+  return skill
+});
 ---
 
-<div class='flex flex-col gap-y-2 md:flex-row md:gap-x-5 md:gap-y-0'>
-  <h3 class='w-1/5 font-medium'>{title}</h3>
-  <div class='flex flex-row flex-wrap gap-x-4 gap-y-2 md:w-4/5'>
-    {skills.map((skill: string) => <Button as='button' title={skill} variant='pill' />)}
+<div class="flex flex-col gap-y-3 md:flex-row md:gap-x-6 md:gap-y-0">
+  <Tag class="w-full shrink-0 font-semibold md:w-32">{title}</Tag>
+  <div class="flex flex-row flex-wrap gap-3">
+    {normalizedSkills.map(skill => (
+      <SkillBadge name={skill.name} icon={skill.icon} />
+    ))}
   </div>
 </div>

@@ -1,64 +1,96 @@
 ---
-import { Image } from 'astro:assets'
-
 import { Quote } from 'astro-pure/advanced'
+
 import { PostPreview } from 'astro-pure/components/pages'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
 import { Button, Card, Icon, Label } from 'astro-pure/user'
-import PageLayout from '@/layouts/BaseLayout.astro'
+import { Image } from 'astro:assets'
+import avatar from '@/assets/avatar.png'
 import ProjectCard from '@/components/home/ProjectCard.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
+import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
 
-const languages = ['Html', 'JavaScript', 'CSS', 'Shell']
-const frontend = ['TypeScript', 'Vite', 'Webpack', 'Astro']
-const backend = ['Vercel', 'Waline']
+const languages = [
+  { name: 'JavaScript', icon: 'devicon:javascript' },
+  { name: 'TypeScript', icon: 'devicon:typescript' },
+  { name: 'Python', icon: 'devicon:python' },
+  { name: 'Kotlin', icon: 'devicon:kotlin' },
+  { name: 'Dart', icon: 'devicon:dart' },
+]
+const frontend = [
+  { name: 'Vue', icon: 'devicon:vuejs' },
+  { name: 'React', icon: 'devicon:react' },
+  { name: 'Solid', icon: 'devicon:solidjs' },
+  { name: 'Svelte', icon: 'devicon:svelte' },
+  { name: 'Astro', icon: 'devicon:astro' },
+  { name: 'Nuxt.js', icon: 'devicon:nuxtjs' },
+  { name: 'Next.js', icon: 'devicon:nextjs' },
+  { name: 'Vite', icon: 'devicon:vitejs' },
+  { name: 'Vitest', icon: 'devicon:vitest' },
+  { name: 'Playwright', icon: 'devicon:playwright' },
+  { name: 'Tailwind CSS', icon: 'devicon:tailwindcss' },
+  { name: 'UnoCSS' },
+  { name: 'Tanstack Start' },
+]
+const backend = [
+  { name: 'Node.js', icon: 'devicon:nodejs' },
+  { name: 'Nest.js', icon: 'devicon:nestjs' },
+  { name: 'MongoDB', icon: 'devicon:mongodb' },
+  { name: 'Cloudflare', icon: 'devicon:cloudflare' },
+  { name: 'Netlify', icon: 'devicon:netlify' },
+  { name: 'Vercel', icon: 'devicon:vercel' },
+  { name: 'Supabase', icon: 'devicon:supabase' },
+  { name: 'Prisma', icon: 'devicon:prisma' },
+  { name: 'Drizzle' },
+]
+const native = [
+  { name: 'React Native', icon: 'devicon:expo' },
+  { name: 'Flutter', icon: 'devicon:flutter' },
+  { name: 'Electron', icon: 'devicon:electron' },
+  { name: 'Tauri', icon: 'devicon:tauri' },
+  { name: 'Ionic', icon: 'devicon:ionic' },
+  { name: 'KMP', icon: 'devicon:jetpackcompose' },
+]
 
 const MAX_POSTS = 10
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
-
-const imagePath = config.logo.src
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/*.{jpeg,jpg,png,gif,avif,webp}'
-)
-if (!images[imagePath])
-  throw new Error(
-    `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,avif,webp}"`
-  )
 ---
 
-<PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
-  <main class='flex w-full flex-col items-center'>
-    <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
+<PageLayout meta={{ title: 'Home' }} highlightColor="#659EB9">
+  <main class="w-full flex flex-col items-center">
+    <section class="animate mb-10 flex flex-col items-center gap-y-7" id="content-header">
       <Image
-        src={images[imagePath]()}
-        alt={config.logo.alt || 'Profile'}
-        class='h-28 w-auto rounded-full border p-1'
-        loading='eager'
-        fetchpriority='high'
+        src={avatar}
+        alt="profile"
+        class="h-28 w-auto border rounded-full p-1"
+        loading="eager"
       />
 
-      <div class='flex flex-col items-center gap-y-4'>
-        <h1 class='text-3xl font-medium'>{config.author}</h1>
-        <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-          <Label title='Somewhere'>
-            <Icon name='location' class='size-5' slot='icon' />
+      <div class="flex flex-col items-center gap-y-4">
+        <div class="flex flex-col items-center gap-y-1 text-center">
+          <h1 class="text-3xl font-bold">{config.author}</h1>
+          <p class="text-muted-foreground">Life's map has two poles, but a thousand bewildering paths lie between them.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-x-7 gap-y-3">
+          <Label title="China / Shenzhen">
+            <Icon name="location" class="size-5" slot="icon" />
           </Label>
           <Label
-            title='Source code'
-            as='a'
-            href='https://github.com/cworld1/astro-theme-pure'
-            target='_blank'
+            title="Github"
+            as="a"
+            href="https://github.com/kutius"
+            target="_blank"
           >
-            <Icon name='github' class='size-5' slot='icon' />
+            <Icon name="github" class="size-5" slot="icon" />
           </Label>
         </div>
       </div>
 
       {/* Get template */}
-      <a
+      {/* <a
         href='https://github.com/cworld1/astro-theme-pure'
         target='_blank'
         class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
@@ -70,30 +102,28 @@ if (!images[imagePath])
           <span class='size-2 rounded-full bg-green-400'></span>
         </span>
         <p class='font-medium text-muted-foreground'>Get Template</p>
-      </a>
+      </a> */}
     </section>
 
-    <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
-      <Section title='About'>
-        <p class='text-muted-foreground'>Developer / Designer</p>
-        <p class='text-muted-foreground'>
-          Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione
-          indoctum dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel,
-          at eum oratio possit voluptatum.
+    <div id="content" class="animate flex flex-col gap-y-10 lg:w-5/6 md:w-4/5">
+      <Section title="About">
+        <p class="text-muted-foreground">Developer / Designer</p>
+        <p class="text-muted-foreground">
+          A developer and designer passionate about open source and crafting elegant solutions. I love building with modern web technologies. This is my digital garden where I share my journey, projects, and thoughts.
         </p>
-        <Button title='More about me' class='w-fit self-end' href='/about' variant='ahead' />
+        <Button title="More about me" class="w-fit self-end" href="/about" variant="ahead" />
       </Section>
       {
         allPostsByDate.length > 0 && (
-          <Section title='Posts'>
-            <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
-              {allPostsByDate.map((p) => (
-                <li class='flex flex-col gap-x-2 sm:flex-row'>
+          <Section title="Posts">
+            <ul class="flex flex-col gap-y-1.5 sm:gap-y-2">
+              {allPostsByDate.map(p => (
+                <li class="flex flex-col gap-x-2 sm:flex-row">
                   <PostPreview post={p} />
                 </li>
               ))}
             </ul>
-            <Button title='More posts' class='w-fit self-end' href='/blog' variant='ahead' />
+            <Button title="More posts" class="w-fit self-end" href="/blog" variant="ahead" />
           </Section>
         )
       }
@@ -127,13 +157,13 @@ if (!images[imagePath])
       />
     </Section> */
       }
-      <Section title='Education'>
+      <Section title="Education">
         <Card
-          as='a'
-          heading='Lorem ipsum'
-          subheading='Lorem ipsum dolor sit amet, vidit suscipit at mei.'
-          date='August 2021 - July 2025'
-          href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+          as="a"
+          heading="ECJTU"
+          subheading="Software Engineering"
+          date="August 2018 - July 2022"
+          href="https://www.ecjtu.edu.cn"
         >
           {
             /* <ul class='ms-4 list-disc text-muted-foreground'>
@@ -147,51 +177,29 @@ if (!images[imagePath])
         </Card>
       </Section>
 
-      <Section title='Website List'>
-        <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+      <Section title="Projects">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <ProjectCard
-            href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            heading='Lorem ipsum'
-            subheading='Do not go gentle into that good night'
-            imagePath='/src/assets/projects/1.avif'
+            href="https://github.com/Kutius/EldenSaving"
+            heading="EldenSaving"
+            subheading="A tool for backup Elden Ring save data"
           />
           <ProjectCard
-            href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            heading='Lorem ipsum'
-            subheading='Old age burn and rave at close of day'
-            imagePath='/src/assets/projects/2.avif'
-          />
-          <ProjectCard
-            href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            heading='Lorem ipsum'
-            subheading='Rage, rage against the dying of the light'
-            imagePath='/src/assets/projects/3.avif'
-          />
-          <ProjectCard
-            href='/projects'
-            heading='More projects'
-            subheading='Check out more projects'
-            imagePath='/src/assets/projects/4.avif'
+            href="/projects"
+            heading="More..."
+            subheading="Check out more projects"
+            imagePath="/src/assets/projects/wen-qiao-g_w8I64FiO0-unsplash.jpg"
           />
         </div>
       </Section>
 
-      <Section title='Certifications'>
-        <Card
-          as='a'
-          heading='Lorem ipsum'
-          subheading='Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio possit voluptatum. Dicat ceteros cu vim. Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.'
-          date='July 2024'
-          href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        />
-      </Section>
-
-      <Section title='Skills'>
-        <SkillLayout title='Languages' skills={languages} />
-        <SkillLayout title='Frontend' skills={frontend} />
-        <SkillLayout title='Backend' skills={backend} />
+      <Section title="Skills">
+        <SkillLayout title="Languages" skills={languages} />
+        <SkillLayout title="Frontend" skills={frontend} />
+        <SkillLayout title="Backend" skills={backend} />
+        <SkillLayout title="Native" skills={native} />
       </Section>
     </div>
-    <Quote class='mt-12' />
+    <Quote class="mt-12" />
   </main>
 </PageLayout>
